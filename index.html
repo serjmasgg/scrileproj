@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+
 </head>
 <style>
     * {
         box-sizing: border-box;
     }
-
 
     .wrapper {
         display: flex;
@@ -24,7 +25,7 @@
     .main-container {
         background-color: #F2F2F2;
         width: auto;
-        height: auto;
+        min-height: 50px;
         display: flex;
         /* align-items: center; */
         flex-direction: column;
@@ -35,11 +36,11 @@
 
     }
 
+
     .content {
-        /* width: 90%; */
+        /*width: 90%; */
         background-color: #fff;
         margin: 10px;
-        padding: 0px 30px;
         border: 1px solid rgb(167, 167, 167);
         border-radius: 10px;
     }
@@ -64,8 +65,8 @@
     }
 
     .loading-bar-container {
-        /* margin-top: 10px; */
-        width: 50%;
+        margin-top: 10px;
+        width: 150px;
         padding-left: 5px;
         padding-right: 5px;
         height: 14px;
@@ -79,14 +80,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 5px;
-        height: 10vh;
+        padding-bottom: 20px;
+        padding-right: 30px;
+        padding-left: 30px;
     }
 
     .first-flex>p {
-        margin-right: 20px;
         font-weight: 700;
         color: #626262;
+        margin-top: 23px;
+        margin-right: 20px;
     }
 
     #arrow-container {
@@ -101,23 +104,24 @@
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
         border-bottom: 5px solid #494949;
-        margin-top: 18px;
+        margin-top: 15px;
         margin-right: -5px;
         /* position: absolute;
-top: 160%;
-left: 5px; */
+  top: 160%;
+  left: 5px; */
     }
 
     #number-container {
         position: absolute;
-        top: 13px;
+        top: 10px;
         left: -2px;
     }
 
     .target {
         margin-left: 0px;
         margin-right: 5px;
-        padding: 5px;
+        padding: 3px 5px;
+        margin-top: 10px;
         /* background-color: #807E81; */
         background: linear-gradient(to top, #707070 0%, #707070 0%, #707070 21%, #aaaaaa 100%);
         color: #fff;
@@ -141,20 +145,37 @@ left: 5px; */
         align-items: center;
         color: #626262;
         transition: all ease 1s;
+        height: 15px;
+        margin-bottom: 10px;
 
     }
 
     .second-flex img {
         height: 100%;
-        margin-right: 5px;
+        margin-right: 7px;
     }
 
     .done {
         background: linear-gradient(to bottom, rgb(89, 255, 105) 0%, rgb(62, 255, 82) 0%, rgb(0, 204, 20) 21%, #00A910 100%);
     }
 
+    @media screen and (max-width: 450px) {
+        .main-container {
+            width: 100%;
+        }
+
+        .first-flex {
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+
+        .first-flex>p {
+            margin-right: 2px;
+        }
+    }
+
     #btn {
-        margin-top: 50px;
+        margin-top: 20px;
     }
 
 </style>
@@ -188,7 +209,10 @@ left: 5px; */
         </div>
         <button id='btn'>Click</button>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
+
     <script>
         var initialValue = null;
         var dif = null;
@@ -197,10 +221,8 @@ left: 5px; */
         dif = target - initialValue;
 
         $(document).ready(
-
             $.ajax({
                 url: 'http://alex.devel.softservice.org/testapi/',
-
                 success: (data) => {
                     initialValue = data.balance_usd;
                     dif = target - initialValue;
@@ -209,11 +231,7 @@ left: 5px; */
                     var msg = '';
                     if (jqXHR.status === 0) {
                         msg = 'Not connect.\n Verify Network.';
-                    } else if
-                    PNG1 KB
-                    file.png
-
-                    (jqXHR.status == 404) {
+                    } else if (jqXHR.status == 404) {
                         msg = 'Requested page not found. [404]';
                     } else if (jqXHR.status == 500) {
                         msg = 'Internal Server Error [500].';
@@ -233,18 +251,24 @@ left: 5px; */
             })
         )
 
+        window.onload = function onLoadChange() {
+            initialValue = 14
+            dif = target - initialValue;
+            $('.loading-bar').width(Math.ceil(initialValue) / target * 100 + '%');
+            console.log('The Script will load now.');
+            $('#targetSpan').text(Math.round(dif));
+            $('#number-container').text('$' + initialValue.toFixed(1));
+        }
+
         $('#btn').on('click', foo)
 
         function foo() {
             if (initialValue) {
-                $('.loading-bar').width(Math.ceil(initialValue) / target * 100 + '%');
                 var percentDif = 100 - parseInt(loadingBar.style.width);
                 var count = dif / 0.2;
                 var step = percentDif / count;
-
                 $('#targetSpan').text(Math.round(dif));
-                $('#number-container').text('$' + initialValue.toFixed(1));
-
+                //$('#number-container').text('$' + initialValue.toFixed(1));
                 var interval = setInterval(
                     () => {
                         initialValue += 0.2;
@@ -263,7 +287,7 @@ left: 5px; */
                             clearInterval(interval)
                         }
                         console.log(loadingBar.style.width)
-                    }, 500
+                    }, 2000
                 )
             } else {
                 console.log('error')
@@ -272,4 +296,5 @@ left: 5px; */
 
     </script>
 </body>
+
 </html>

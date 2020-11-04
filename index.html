@@ -12,19 +12,19 @@
         box-sizing: border-box;
     }
 
+
     .wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        height: auto;
-        min-height: 700px;
+        height: 100vh;
     }
 
     .main-container {
         background-color: #F2F2F2;
-        width: 30%;
-        min-height: 50px;
+        width: auto;
+        height: auto;
         display: flex;
         /* align-items: center; */
         flex-direction: column;
@@ -39,6 +39,7 @@
         /* width: 90%; */
         background-color: #fff;
         margin: 10px;
+        padding: 0px 30px;
         border: 1px solid rgb(167, 167, 167);
         border-radius: 10px;
     }
@@ -78,10 +79,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 20px;
+        padding-bottom: 5px;
+        height: 10vh;
     }
 
     .first-flex>p {
+        margin-right: 20px;
         font-weight: 700;
         color: #626262;
     }
@@ -101,8 +104,8 @@
         margin-top: 18px;
         margin-right: -5px;
         /* position: absolute;
-  top: 160%;
-  left: 5px; */
+top: 160%;
+left: 5px; */
     }
 
     #number-container {
@@ -112,7 +115,7 @@
     }
 
     .target {
-        margin-left: 5px;
+        margin-left: 0px;
         margin-right: 5px;
         padding: 5px;
         /* background-color: #807E81; */
@@ -194,8 +197,10 @@
         dif = target - initialValue;
 
         $(document).ready(
+
             $.ajax({
                 url: 'http://alex.devel.softservice.org/testapi/',
+
                 success: (data) => {
                     initialValue = data.balance_usd;
                     dif = target - initialValue;
@@ -204,7 +209,11 @@
                     var msg = '';
                     if (jqXHR.status === 0) {
                         msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
+                    } else if
+                    PNG1 KB
+                    file.png
+
+                    (jqXHR.status == 404) {
                         msg = 'Requested page not found. [404]';
                     } else if (jqXHR.status == 500) {
                         msg = 'Internal Server Error [500].';
@@ -263,5 +272,4 @@
 
     </script>
 </body>
-
 </html>
